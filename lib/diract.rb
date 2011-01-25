@@ -36,72 +36,88 @@ class Array
   end
 end
 
-def load_conf(fname = "diract.conf")
-   if File.exists?(fname) then
-      file = File.new(fname,"r")
-   else
-      print 'Donfig does not exist. Creating...'
-      file = File.new(fname,"w+")
-      file.puts "c:\\Darek\\@Action\\"
-      file.rewind
-      puts 'Done.'
+class Diract
+   def initialize(fname = "diract.conf")
+      @conf = load_conf(fname)
    end
-   file
-end
 
-$counter = 1
+   def list
+      out = ""
+      dir_index = 'a'
+      @conf.each do |line|
+         out << rec_listdir(line.chomp, dir_index)
+         out << "\n"
+         dir_index.next! 
+      end
+      out
+   end
 
-def rec_listdir(directory, dir_index)
-   counter = 0
-   old_dr = Dir.pwd
-   if File.directory?(directory)
-      Dir.chdir(directory)
-      files_in_dir = Dir['*']
-      described = Hash.new
-
-      if files_in_dir.empty?
-         File.delete('.diract') if File.exists?('.diract')
+   def load_conf(fname = "diract.conf")
+      if File.exists?(fname) then
+         file = File.new(fname,"r")
       else
-         key_width = files_in_dir.max_by {|x| x.length }.length
+         print 'Donfig does not exist. Creating...'
+         file = File.new(fname,"w+")
+         file.puts "c:\\Darek\\@Action\\"
+         file.rewind
+         puts 'Done.'
+      end
+      file
+   end
 
-         puts
-         puts "==== (" + dir_index.color(YELLOW) + ') ' + directory.color(RED) + " ===="
-         if File.exists?('.diract')
-            #puts '.diract exists'
+   $counter = 1
 
-            described = YAML::load_file('.diract')
-            #print 'described before changes: '
-            #pp described
+   def rec_listdir(directory, dir_index)
+      out = ""
+      counter = 0
+      old_dr = Dir.pwd
+      if File.directory?(directory)
+         Dir.chdir(directory)
+         files_in_dir = Dir['*']
+         described = Hash.new
 
-            described = files_in_dir.sort.to_hash_keys{nil}.merge(described)
-
-            #print 'merged hash: '
-            #pp described
-
-            described.delete_if {|key,val| !files_in_dir.include?(key)}
-
-            #print 'files after removal: '
-            #pp described
-
+         if files_in_dir.empty?
+            File.delete('.diract') if File.exists?('.diract')
          else
-            items_H = files_in_dir.sort.to_hash_keys{nil}
-            File.open( '.diract', 'w' ) do |out|
-               YAML.dump( items_H, out )
+            key_width = files_in_dir.max_by {|x| x.length }.length
+
+            out << "\n"
+            out << "==== (" + dir_index.color(YELLOW) + ') ' + directory.color(RED) + " ====\n"
+            if File.exists?('.diract')
+               #puts '.diract exists'
+
+               described = YAML::load_file('.diract')
+               #print 'described before changes: '
+               #pp described
+
+               described = files_in_dir.sort.to_hash_keys{nil}.merge(described)
+
+               #print 'merged hash: '
+               #pp described
+
+               described.delete_if {|key,val| !files_in_dir.include?(key)}
+
+               #print 'files after removal: '
+               #pp described
+
+            else
+               items_H = files_in_dir.sort.to_hash_keys{nil}
+               File.open( '.diract', 'w' ) do |out|
+                  YAML.dump( items_H, out )
+               end
+               described = items_H
             end
-            described = items_H
-         end
 
-         described.each_with_index do |pair, i|
-            puts "%#{key_width+11}s (%#{described.length+2}s): %s" % [pair[0].color(GREEN), (i+1).to_s.color(YELLOW),  pair[1]]
-         end
+            described.each_with_index do |pair, i|
+               out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [pair[0].color(GREEN), (i+1).to_s.color(YELLOW),  pair[1]]
+            end
 
-         File.open( '.diract', 'w' ) do |out|
-            YAML.dump( described, out )
+            File.open( '.diract', 'w' ) do |out|
+               YAML.dump( described, out )
+            end
          end
       end
-      true
-   else
-      false
+      out
    end
 end
 

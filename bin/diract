@@ -29,10 +29,9 @@ cmd_opts = case cmd
 
    when "list" # parse delete options
    begin
-      dir_index = 'a'
-      load_conf.each do |line|
-         dir_index.next! if rec_listdir(line.chomp, dir_index)
-      end
+      diract = Diract.new
+      puts diract.list
+
    rescue SystemCallError
       puts "unknown entry found"
    end
