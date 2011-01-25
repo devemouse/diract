@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/devemouse/diract"
   gem.license = "MIT"
   gem.summary = %Q{Action directories lister}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{Diract lists contents of precofigured 'action' directories. Create a diract.conf file with simple list of directories and run diract.}
   gem.email = "devemouse@gmail.com"
   gem.authors = ["Dariusz Synowiec"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
