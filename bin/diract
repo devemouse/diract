@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'diract'
+
+SUB_COMMANDS = %w(list delete)
+
+global_opts = Trollop::options do
+   version "diract v0.0 (c) 2011 devemouse (Dariusz Synowiec) devemouse@gmail.com"
+   banner <<-EOS
+   Action directories lister
+
+   Usage:
+   diract [options] sub_command
+
+   available sub_commands:
+
+#{SUB_COMMANDS.to_s}
+
+   where [options] are:
+
+EOS
+   opt :dry_run, "Don't actually do anything", :short => "-n"
+   opt :debug, "display debug information", :default => false
+   stop_on SUB_COMMANDS
+end
+
+cmd = ARGV.shift # get the subcommand
+cmd_opts = case cmd
+
+   when "list" # parse delete options
+   begin
+      dir_index = 'a'
+      load_conf.each do |line|
+         dir_index.next! if rec_listdir(line.chomp, dir_index)
+      end
+   rescue SystemCallError
+      puts "unknown entry found"
+   end
+
+   when "delete"  # parse copy options
+   else
+      Trollop::die "unknown subcommand #{cmd.inspect}"
+   end
+
+if global_opts[:debug]
+   puts "Global options: #{global_opts.inspect}"
+   puts "Subcommand: #{cmd.inspect}"
+   puts "Subcommand options: #{cmd_opts.inspect}"
+   puts "Remaining arguments: #{ARGV.inspect}"
+end
+
