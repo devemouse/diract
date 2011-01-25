@@ -48,3 +48,4 @@ if global_opts[:debug]
    puts "Remaining arguments: #{ARGV.inspect}"
 end
 
+# vim: syntax=ruby
