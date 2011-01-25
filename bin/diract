@@ -21,27 +21,31 @@ global_opts = Trollop::options do
 EOS
    opt :dry_run, "Don't actually do anything", :short => "-n"
    opt :debug, "display debug information", :default => false
+   opt :config, "configuration file", :type => String, :default => "diract.conf"
    stop_on SUB_COMMANDS
 end
+
+$DEBUG = global_opts[:debug]
+diract = Diract.new(global_opts[:config])
+
 
 cmd = ARGV.shift # get the subcommand
 cmd_opts = case cmd
 
-   when "list" # parse delete options
+   when "list" # parse list options
    begin
-      diract = Diract.new
       puts diract.list
-
    rescue SystemCallError
       puts "unknown entry found"
    end
 
-   when "delete"  # parse copy options
+   when "delete"  # parse delete options
+      diract.delete(ARGV)
    else
       Trollop::die "unknown subcommand #{cmd.inspect}"
    end
 
-if global_opts[:debug]
+if $DEBUG
    puts "Global options: #{global_opts.inspect}"
    puts "Subcommand: #{cmd.inspect}"
    puts "Subcommand options: #{cmd_opts.inspect}"

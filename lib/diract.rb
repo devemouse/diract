@@ -37,8 +37,18 @@ class Array
 end
 
 class Diract
+   attr_accessor :debug
+
    def initialize(fname = "diract.conf")
       @conf = load_conf(fname)
+      @entries = Hash.new
+   end
+
+   def delete(entries)
+      pp entries
+      list if @entries.empty?
+      pp @entries
+      pp entries.map { |el| @entries.has_key?(el) ? el : nil}.compact
    end
 
    def list
@@ -56,7 +66,7 @@ class Diract
       if File.exists?(fname) then
          file = File.new(fname,"r")
       else
-         print 'Donfig does not exist. Creating...'
+         print 'Config does not exist. Creating...'
          file = File.new(fname,"w+")
          file.puts "c:\\Darek\\@Action\\"
          file.rewind
@@ -65,15 +75,13 @@ class Diract
       file
    end
 
-   $counter = 1
 
    def rec_listdir(directory, dir_index)
       out = ""
-      counter = 0
       old_dr = Dir.pwd
       if File.directory?(directory)
-         Dir.chdir(directory)
-         files_in_dir = Dir['*']
+         #Dir.chdir(directory)
+         files_in_dir = Dir[File.join(directory, '*')]
          described = Hash.new
 
          if files_in_dir.empty?
@@ -110,6 +118,7 @@ class Diract
 
             described.each_with_index do |pair, i|
                out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [pair[0].color(GREEN), (i+1).to_s.color(YELLOW),  pair[1]]
+               @entries[dir_index + (i+1).to_s] = pair[0]
             end
 
             File.open( '.diract', 'w' ) do |out|
