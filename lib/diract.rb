@@ -77,6 +77,27 @@ class Diract
       memo
    end
 
+   def update_dot_diract(directory)
+      files_in_dir = Dir[File.join(directory, '*')].map {|el| File.basename(el)}
+
+      described = Hash.new
+      dot_diract = File.join(directory, '.diract')
+      dot_diract_exists = File.exists?(dot_diract)
+
+      if files_in_dir.empty?
+         File.delete(dot_diract) if dot_diract_exists
+      else
+         described = files_in_dir.sort.to_hash_keys{nil}
+         if dot_diract_exists
+            described.merge!(YAML::load_file(dot_diract)).delete_if{|key,val| !files_in_dir.include?(key)}
+         end
+
+         File.open(dot_diract, 'w' ) do |out|
+            YAML.dump( described, out )
+         end
+      end
+   end
+
    def rec_listdir(directory, dir_index)
       out = ""
       old_dr = Dir.pwd
