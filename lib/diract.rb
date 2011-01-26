@@ -2,7 +2,6 @@
 
 require 'yaml'
 require 'pp'
-require 'trollop'
 
 RED      = "1;31"
 GREEN    = "32"
@@ -16,12 +15,14 @@ unless RUBY_PLATFORM.include?('linux')
    end
 end
 
+#String extended by coloring output
 class String
    def color(color)
       return "\e[" + color + "m" + self + "\e[0m"
    end
 end
 
+#Array is extended by Array to hash converters
 class Array
   def to_hash_keys(&block)
     Hash[*self.collect { |vector|
@@ -41,42 +42,45 @@ class Diract
    DEFAULT_CFG = File.join(ENV['HOME'], '.diract.conf')
 
    def initialize(fname = DEFAULT_CFG)
-      @conf = load_conf(fname)
-      @entries = Hash.new
-   end
-
-   def delete(entries)
-      pp entries if $DEBUG
-      list if @entries.empty?
-      pp @entries if $DEBUG
-      pp entries.map { |el| @entries.has_key?(el) ? el : nil}.compact if $DEBUG
-   end
-
-   def list
-      out = ""
-      dir_index = 'a'
-      @conf.each do |line|
-         out << rec_listdir(line.chomp, dir_index) << "\n"
-         dir_index.next! 
-      end
-      out
-   end
-
-   def load_conf(fname = DEFAULT_CFG)
       if File.exists?(fname) then
          file = File.new(fname,"r")
       else
          file = File.new(fname,"w+")
       end
-      file
+      @conf = file.map {|el| el.chomp}
+      file.close
+      @entries = Hash.new
    end
 
+   def delete(entries)
+      list if @entries.empty?
+
+      if entries.is_a?(Enumerable)
+      else
+         file_to_remove = @entries[entries]
+         full_path = file_to_remove[:file]
+         if File.exists?(full_path)
+            FileUtils.remove_entry_secure full_path, true
+         end
+         File.basename(full_path).to_s + ': ' + file_to_remove[:desc].to_s
+      end
+   end
+
+   def list
+      dir_indexes = ('a'..'z').to_a
+      memo = ""
+
+      @conf.each_with_index do |line,index|
+         memo << rec_listdir(line, dir_indexes[index]) << "\n"
+      end
+
+      memo
+   end
 
    def rec_listdir(directory, dir_index)
       out = ""
       old_dr = Dir.pwd
       if File.directory?(directory)
-         #Dir.chdir(directory)
          files_in_dir = Dir[File.join(directory, '*')].map {|el| File.basename(el)}
          described = Hash.new
          dot_diract = File.join(directory, '.diract')
@@ -103,7 +107,7 @@ class Diract
             described.each_with_index do |pair, index|
                index_str = index.to_s
                out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [pair[0].color(GREEN), index_str.color(YELLOW),  pair[1]]
-               @entries[dir_index + index_str] = pair[0]
+               @entries[dir_index + index_str] = {:file => File.join(directory, pair[0]), :desc => pair[1] }
             end
 
             File.open(dot_diract, 'w' ) do |out|

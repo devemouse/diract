@@ -90,6 +90,14 @@ class TestDiract < Test::Unit::TestCase
          }
       end
 
+      should "remove entries from .diract if files are deleted" do
+         flunk "test not implemented"
+      end
+
+      should "add entries to .diract if new files are created" do
+         flunk "test not implemented"
+      end
+
       teardown do
          clean
       end
