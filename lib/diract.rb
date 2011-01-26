@@ -37,18 +37,17 @@ class Array
 end
 
 class Diract
-   attr_accessor :debug
 
-   def initialize(fname = "diract.conf")
+   def initialize(fname = "~/diract.conf")
       @conf = load_conf(fname)
       @entries = Hash.new
    end
 
    def delete(entries)
-      pp entries
+      pp entries if $DEBUG
       list if @entries.empty?
-      pp @entries
-      pp entries.map { |el| @entries.has_key?(el) ? el : nil}.compact
+      pp @entries if $DEBUG
+      pp entries.map { |el| @entries.has_key?(el) ? el : nil}.compact if $DEBUG
    end
 
    def list

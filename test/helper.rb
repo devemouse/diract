@@ -18,16 +18,51 @@ require 'tmpdir'
 require 'tempfile'
 
 class Test::Unit::TestCase
-   def prepare_conf
-      @tmpdir = Dir.mktmpdir
-      @file = Tempfile.new('foo')
+   def prepare_conf(num_of_dirs = 1)
+      @conf_file = Tempfile.new('foo')
+      @testfiles = [ "file1", "file2", "file3"]
 
-      @file.puts @tmpdir
+      if num_of_dirs > 1
+         @tmpdir = Array.new(num_of_dirs)
+
+         @tmpdir.map! { |dir|
+            dir = Dir.mktmpdir
+
+            @testfiles.each { |el|
+               add_test_file(el, dir)
+            }
+
+            @conf_file.puts dir
+         }
+
+      else
+         @tmpdir = Dir.mktmpdir
+
+         @testfiles.each { |el|
+            add_test_file(el)
+         }
+
+         @conf_file.puts @tmpdir
+      end
+      @conf_file.close
+   end
+
+   def add_test_file(name = '', path = @tmpdir)
+      unless name.empty?
+         f = File.new(File.join(path, name), "w")
+         f.close
+      end
    end
 
    def clean
-      FileUtils.remove_entry_secure @tmpdir, true
-      @file.close
-      @file.unlink
+      if @tmpdir.is_a?(Array)
+         @tmpdir.each { |el|
+            FileUtils.remove_entry_secure el, true
+         }
+      else
+         FileUtils.remove_entry_secure @tmpdir, true
+      end
+      @conf_file.close
+      @conf_file.unlink
    end
 end
