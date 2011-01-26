@@ -20,7 +20,9 @@ require 'tempfile'
 class Test::Unit::TestCase
    def prepare_conf(num_of_dirs = 1)
       @conf_file = Tempfile.new('foo')
-      @testfiles = [ "file1", "file2", "file3"]
+      @testfiles = [ {:name => "file1", :desc => "f1 description1"},
+                     {:name => "file2", :desc => nil},
+                     {:name => "file3", :desc => "f3 description3"} ]
 
       if num_of_dirs > 1
          @tmpdir = Array.new(num_of_dirs)
@@ -29,7 +31,7 @@ class Test::Unit::TestCase
             dir = Dir.mktmpdir
 
             @testfiles.each { |el|
-               add_test_file(el, dir)
+               add_test_file(el[:name], dir)
             }
 
             @conf_file.puts dir
@@ -39,7 +41,7 @@ class Test::Unit::TestCase
          @tmpdir = Dir.mktmpdir
 
          @testfiles.each { |el|
-            add_test_file(el)
+            add_test_file(el[:name])
          }
 
          @conf_file.puts @tmpdir

@@ -8,6 +8,7 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'rake'
+require 'metric_fu'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
@@ -34,6 +35,11 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
+require 'reek/rake/task'
+Reek::Rake::Task.new do |t|
+  t.fail_on_error = false
+end
+
 require 'rcov/rcovtask'
 Rcov::RcovTask.new do |test|
   test.libs << 'test'
@@ -41,7 +47,9 @@ Rcov::RcovTask.new do |test|
   test.verbose = true
 end
 
-task :default => :test
+task :default => :test_all
+
+task :test_all => [:rcov, :reek]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|

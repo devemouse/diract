@@ -12,4 +12,5 @@ group :development do
   gem "rcov", ">= 0"
   gem "trollop", "~> 1.16.2"
   gem "win32console", "~> 1.3.0"
+  gem "metric_fu", "~> 2.0.1"
 end

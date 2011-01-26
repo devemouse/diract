@@ -8,7 +8,7 @@ class TestDiract < Test::Unit::TestCase
       end
 
       should "fake" do
-         list =  Diract.new("diract.conf").list
+         list =  Diract.new(@conf_file.path).list
          assert_not_nil list
          puts list if $DEBUG
       end

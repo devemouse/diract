@@ -24,21 +24,23 @@ end
 
 class Array
   def to_hash_keys(&block)
-    Hash[*self.collect { |v|
-      [v, block.call(v)]
+    Hash[*self.collect { |vector|
+      [vector, block.call(vector)]
     }.flatten]
   end
 
   def to_hash_values(&block)
-    Hash[*self.collect { |v|
-      [block.call(v), v]
+    Hash[*self.collect { |vector|
+      [block.call(vector), vector]
     }.flatten]
   end
 end
 
+# Diract class contains all functionality of diract app
 class Diract
+   DEFAULT_CFG = File.join(ENV['HOME'], '.diract.conf')
 
-   def initialize(fname = "~/diract.conf")
+   def initialize(fname = DEFAULT_CFG)
       @conf = load_conf(fname)
       @entries = Hash.new
    end
@@ -54,22 +56,17 @@ class Diract
       out = ""
       dir_index = 'a'
       @conf.each do |line|
-         out << rec_listdir(line.chomp, dir_index)
-         out << "\n"
+         out << rec_listdir(line.chomp, dir_index) << "\n"
          dir_index.next! 
       end
       out
    end
 
-   def load_conf(fname = "diract.conf")
+   def load_conf(fname = DEFAULT_CFG)
       if File.exists?(fname) then
          file = File.new(fname,"r")
       else
-         print 'Config does not exist. Creating...'
          file = File.new(fname,"w+")
-         file.puts "c:\\Darek\\@Action\\"
-         file.rewind
-         puts 'Done.'
       end
       file
    end
@@ -80,47 +77,36 @@ class Diract
       old_dr = Dir.pwd
       if File.directory?(directory)
          #Dir.chdir(directory)
-         files_in_dir = Dir[File.join(directory, '*')]
+         files_in_dir = Dir[File.join(directory, '*')].map {|el| File.basename(el)}
          described = Hash.new
+         dot_diract = File.join(directory, '.diract')
+         dot_diract_exists = File.exists?(dot_diract)
 
          if files_in_dir.empty?
-            File.delete('.diract') if File.exists?('.diract')
+            File.delete(dot_diract) if dot_diract_exists
          else
-            key_width = files_in_dir.max_by {|x| x.length }.length
+            key_width = files_in_dir.max_by {|el| el.length }.length
 
             out << "\n"
             out << "==== (" + dir_index.color(YELLOW) + ') ' + directory.color(RED) + " ====\n"
-            if File.exists?('.diract')
-               #puts '.diract exists'
+            if dot_diract_exists
 
-               described = YAML::load_file('.diract')
-               #print 'described before changes: '
-               #pp described
-
-               described = files_in_dir.sort.to_hash_keys{nil}.merge(described)
-
-               #print 'merged hash: '
-               #pp described
-
-               described.delete_if {|key,val| !files_in_dir.include?(key)}
-
-               #print 'files after removal: '
-               #pp described
+               described = files_in_dir.sort.to_hash_keys{nil}.merge(YAML::load_file(dot_diract)).delete_if {|key,val| !files_in_dir.include?(key)}
 
             else
-               items_H = files_in_dir.sort.to_hash_keys{nil}
-               File.open( '.diract', 'w' ) do |out|
-                  YAML.dump( items_H, out )
+               described = files_in_dir.sort.to_hash_keys{nil}
+               File.open(dot_diract, 'w' ) do |out|
+                  YAML.dump( described, out )
                end
-               described = items_H
             end
 
-            described.each_with_index do |pair, i|
-               out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [pair[0].color(GREEN), (i+1).to_s.color(YELLOW),  pair[1]]
-               @entries[dir_index + (i+1).to_s] = pair[0]
+            described.each_with_index do |pair, index|
+               index_str = index.to_s
+               out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [pair[0].color(GREEN), index_str.color(YELLOW),  pair[1]]
+               @entries[dir_index + index_str] = pair[0]
             end
 
-            File.open( '.diract', 'w' ) do |out|
+            File.open(dot_diract, 'w' ) do |out|
                YAML.dump( described, out )
             end
          end
