@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'diract'
+require 'trollop'
 
 SUB_COMMANDS = %w(list delete)
 
 global_opts = Trollop::options do
-   version "diract v0.0 (c) 2011 devemouse (Dariusz Synowiec) devemouse@gmail.com"
+   version "diract v0.0.0 (c) 2011 devemouse (Dariusz Synowiec) devemouse@gmail.com"
    banner <<-EOS
    Action directories lister
 
@@ -20,35 +21,54 @@ global_opts = Trollop::options do
 
 EOS
    opt :dry_run, "Don't actually do anything", :short => "-n"
-   opt :debug, "display debug information", :default => false
-   opt :config, "configuration file", :type => String, :default => "diract.conf"
+   opt :verbose, "display debug information", :default => false
+   opt :config, "configuration file", :type => String, :default => "diract.conf", :short => "-f"
+   opt :delete, "delete file", :type => String
+   opt :conmment, "add a comment to a file", :type => String
    stop_on SUB_COMMANDS
 end
 
-$DEBUG = global_opts[:debug]
-diract = Diract.new(global_opts[:config])
+$DEBUG = global_opts[:verbose]
+if global_opts[:config_given]
+   diract = Diract.new(global_opts[:config])
+else
+   diract = Diract.new
+end
 
-
-cmd = ARGV.shift # get the subcommand
-cmd_opts = case cmd
-
-   when "list" # parse list options
-   begin
+if global_opts[:delete_given]
+   if diract.delete(global_opts[:delete])
+      puts "file deleted"
       puts diract.list
-   rescue SystemCallError
-      puts "unknown entry found"
-   end
-
-   when "delete"  # parse delete options
-      diract.delete(ARGV)
    else
-      Trollop::die "unknown subcommand #{cmd.inspect}"
+      puts "error deleting file"
    end
+elsif global_opts[:comment_given]
+   puts "you want to comment " + global_opts[:delete]
+else
+   puts diract.list
+end
+
+
+#cmd = ARGV.shift # get the subcommand
+#cmd_opts = case cmd
+
+   #when "list" # parse list options
+   #begin
+      #puts diract.list
+   #rescue SystemCallError
+      #puts "unknown entry found"
+   #end
+
+   #when "delete"  # parse delete options
+      #diract.delete(ARGV)
+   #else
+      #Trollop::die "unknown subcommand #{cmd.inspect}"
+   #end
 
 if $DEBUG
    puts "Global options: #{global_opts.inspect}"
-   puts "Subcommand: #{cmd.inspect}"
-   puts "Subcommand options: #{cmd_opts.inspect}"
+   #puts "Subcommand: #{cmd.inspect}"
+   #puts "Subcommand options: #{cmd_opts.inspect}"
    puts "Remaining arguments: #{ARGV.inspect}"
 end
 

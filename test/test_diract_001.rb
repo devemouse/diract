@@ -91,7 +91,12 @@ class TestDiract < Test::Unit::TestCase
       end
 
       should "remove entries from .diract if files are deleted" do
-         flunk "test not implemented"
+         list_before = Diract.new(@conf_file.path).list
+
+         FileUtils.remove_entry_secure File.join(@tmpdir, @testfiles[0]), true
+         list_after = Diract.new(@conf_file.path).list
+
+         assert_not_equal list_after, list_before, "diract did not update .diract"
       end
 
       should "add entries to .diract if new files are created" do

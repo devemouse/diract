@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'pp'
+require 'fileutils'
 
 RED      = "1;31"
 GREEN    = "32"
@@ -37,9 +38,10 @@ class Array
   end
 end
 
+
 # Diract class contains all functionality of diract app
 class Diract
-   DEFAULT_CFG = File.join(ENV['HOME'], '.diract.conf')
+   DEFAULT_CFG = File.join(ENV['HOME'], '.diractrc')
 
    def initialize(fname = DEFAULT_CFG)
       if File.exists?(fname) then
@@ -64,6 +66,7 @@ class Diract
          end
          File.basename(full_path).to_s + ': ' + file_to_remove[:desc].to_s
       end
+      File.exists?(full_path)
    end
 
    def list
@@ -71,7 +74,7 @@ class Diract
       memo = ""
 
       @conf.each_with_index do |line,index|
-         memo << rec_listdir(line, dir_indexes[index]) << "\n"
+         memo << list_dir(line, dir_indexes[index]) << "\n"
       end
 
       memo
@@ -99,21 +102,22 @@ class Diract
       described
    end
 
-   def rec_listdir(directory, dir_index)
+   def list_dir(directory, dir_index)
       out = ""
-      old_dr = Dir.pwd
       if File.directory?(directory)
          if described = dot_diract(directory)
 
-            key_width = described.max_by {|el| el.length }.length
+            key_width = described.max_by {|key, value| key.length }[0].length
 
             out << "\n"
             out << "==== (" + dir_index.color(YELLOW) + ') ' + directory.color(RED) + " ====\n"
 
             described.each_with_index do |pair, index|
                index_str = index.to_s
-               out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [pair[0].color(GREEN), index_str.color(YELLOW),  pair[1]]
-               @entries[dir_index + index_str] = {:file => File.join(directory, pair[0]), :desc => pair[1] }
+               filename = pair[0]
+               description = pair[1]
+               out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [filename.color(GREEN), index_str.color(YELLOW),  description]
+               @entries[dir_index + index_str] = {:file => File.join(directory, filename), :desc => description }
             end
          end
 
