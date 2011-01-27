@@ -77,7 +77,7 @@ class Diract
       memo
    end
 
-   def update_dot_diract(directory)
+   def dot_diract(directory)
       files_in_dir = Dir[File.join(directory, '*')].map {|el| File.basename(el)}
 
       described = Hash.new
@@ -96,6 +96,7 @@ class Diract
             YAML.dump( described, out )
          end
       end
+      described
    end
 
    def rec_listdir(directory, dir_index)
