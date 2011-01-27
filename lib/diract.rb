@@ -105,7 +105,7 @@ class Diract
       if File.directory?(directory)
          if described = dot_diract(directory)
 
-            key_width = files_in_dir.max_by {|el| el.length }.length
+            key_width = described.max_by {|el| el.length }.length
 
             out << "\n"
             out << "==== (" + dir_index.color(YELLOW) + ') ' + directory.color(RED) + " ====\n"
