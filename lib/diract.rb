@@ -80,7 +80,7 @@ class Diract
    def dot_diract(directory)
       files_in_dir = Dir[File.join(directory, '*')].map {|el| File.basename(el)}
 
-      described = Hash.new
+      described = nil
       dot_diract = File.join(directory, '.diract')
       dot_diract_exists = File.exists?(dot_diract)
 
@@ -103,39 +103,20 @@ class Diract
       out = ""
       old_dr = Dir.pwd
       if File.directory?(directory)
-         files_in_dir = Dir[File.join(directory, '*')].map {|el| File.basename(el)}
-         described = Hash.new
-         dot_diract = File.join(directory, '.diract')
-         dot_diract_exists = File.exists?(dot_diract)
+         if described = dot_diract(directory)
 
-         if files_in_dir.empty?
-            File.delete(dot_diract) if dot_diract_exists
-         else
             key_width = files_in_dir.max_by {|el| el.length }.length
 
             out << "\n"
             out << "==== (" + dir_index.color(YELLOW) + ') ' + directory.color(RED) + " ====\n"
-            if dot_diract_exists
-
-               described = files_in_dir.sort.to_hash_keys{nil}.merge(YAML::load_file(dot_diract)).delete_if {|key,val| !files_in_dir.include?(key)}
-
-            else
-               described = files_in_dir.sort.to_hash_keys{nil}
-               File.open(dot_diract, 'w' ) do |out|
-                  YAML.dump( described, out )
-               end
-            end
 
             described.each_with_index do |pair, index|
                index_str = index.to_s
                out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [pair[0].color(GREEN), index_str.color(YELLOW),  pair[1]]
                @entries[dir_index + index_str] = {:file => File.join(directory, pair[0]), :desc => pair[1] }
             end
-
-            File.open(dot_diract, 'w' ) do |out|
-               YAML.dump( described, out )
-            end
          end
+
       end
       out
    end
