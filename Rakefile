@@ -59,7 +59,7 @@ end
 
 task :default => :test_all
 
-task :test_all => [:rcov, :reek]
+task :test_all => [:rcov, :reek, :profile]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
