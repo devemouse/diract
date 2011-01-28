@@ -57,7 +57,7 @@ Rcov::RcovTask.new do |test|
   test.verbose = true
 end
 
-task :default => :test_all
+task :default => :test
 
 task :test_all => [:rcov, :reek, :profile]
 
