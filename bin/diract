@@ -36,7 +36,7 @@ else
 end
 
 if global_opts[:delete_given]
-   if diract.delete(global_opts[:delete])
+   unless diract.delete(global_opts[:delete]).nil?
       puts "file deleted"
       puts diract.list
    else

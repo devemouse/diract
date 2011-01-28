@@ -38,6 +38,20 @@ class Array
   end
 end
 
+#Hash is expanded by methods needed to operate on entries in .diract files
+class Hash
+   def remove(item)
+      item_to_remove = self[item]
+      full_path = item_to_remove[:file]
+
+      begin
+         FileUtils.remove_entry_secure full_path
+         File.basename(full_path).to_s + ': ' + item_to_remove[:desc].to_s
+      rescue
+         nil
+      end
+   end
+end
 
 # Diract class contains all functionality of diract app
 class Diract
@@ -59,14 +73,11 @@ class Diract
 
       if entries.is_a?(Enumerable)
       else
-         file_to_remove = @entries[entries]
-         full_path = file_to_remove[:file]
-         if File.exists?(full_path)
-            FileUtils.remove_entry_secure full_path, true
-         end
-         File.basename(full_path).to_s + ': ' + file_to_remove[:desc].to_s
+         pp @entries
+         ret = @entries.remove( entries )
+         pp @entries
+         ret
       end
-      File.exists?(full_path)
    end
 
    def list

@@ -8,7 +8,7 @@ class TestDiract < Test::Unit::TestCase
       end
 
       should "be able to describe given file" do
-         flunk "not implemented"
+         skip "not implemented"
       end
 
       teardown do
