@@ -72,6 +72,7 @@ class Diract
       list if @entries.empty?
 
       if entries.is_a?(Enumerable)
+         entries.each {|entry| @entries.remove(entry)}
       else
          @entries.remove( entries )
       end
