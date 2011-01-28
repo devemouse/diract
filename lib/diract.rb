@@ -46,9 +46,15 @@ class Hash
 
       begin
          FileUtils.remove_entry_secure full_path
-         File.basename(full_path).to_s + ': ' + item_to_remove[:desc].to_s
+         File.basename(full_path).to_s + ': ' + item_to_remove[:description].to_s
       rescue
          nil
+      end
+   end
+
+   def save(direcory)
+      File.open(File.join(direcory, '.diract'), 'w' ) do |out|
+         YAML.dump( self[direcory], out )
       end
    end
 end
@@ -65,12 +71,25 @@ class Diract
       end
       @conf = file.map {|el| el.chomp}
       file.close
-      @entries = Hash.new
+      @lookup_table = Hash.new
+      @described_files = Hash.new
    end
 
    def delete(*entries)
-      list if @entries.empty?
-      entries.map {|entry| @entries.remove(entry)}
+      list if @lookup_table.empty?
+      entries.map {|entry| @lookup_table.remove(entry)}
+   end
+
+   def describe(entry, description = '')
+      list if @lookup_table.empty?
+      entry_to_describe = @lookup_table[entry]
+      entry_to_describe[:description] = description
+      file = entry_to_describe[:file]
+
+      @described_files[File.dirname(file)][File.basename(file)] = description
+      @described_files.save File.dirname(file)
+
+      "%s: %s" % [File.basename(file), description]
    end
 
    def list
@@ -80,7 +99,6 @@ class Diract
       @conf.each_with_index do |line,index|
          memo << list_dir(line, dir_indexes[index]) << "\n"
       end
-
       memo
    end
 
@@ -109,19 +127,19 @@ class Diract
    def list_dir(directory, dir_index)
       out = ""
       if File.directory?(directory)
-         if described = dot_diract(directory)
+         if @described_files[directory] = dot_diract(directory)
 
-            key_width = described.max_by {|key, value| key.length }[0].length
+            key_width = @described_files[directory].max_by {|key, value| key.length }[0].length
 
             out << "\n"
             out << "==== (" + dir_index.color(YELLOW) + ') ' + directory.color(RED) + " ====\n"
 
-            described.each_with_index do |pair, index|
+            @described_files[directory].each_with_index do |pair, index|
                index_str = index.to_s
                filename = pair[0]
                description = pair[1]
-               out << "%#{key_width+11}s (%#{described.length+2}s): %s\n" % [filename.color(GREEN), index_str.color(YELLOW),  description]
-               @entries[dir_index + index_str] = {:file => File.join(directory, filename), :desc => description }
+               out << "%#{key_width+11}s (%#{@described_files[directory].length+2}s): %s\n" % [filename.color(GREEN), index_str.color(YELLOW),  description]
+               @lookup_table[dir_index + index_str] = {:file => File.join(directory, filename), :description => description }
             end
          end
 
