@@ -98,10 +98,18 @@ class TestDiract < Test::Unit::TestCase
          list_after = Diract.new(@conf_file.path).list
 
          assert_not_equal list_after, list_before, "diract did not update .diract"
+         assert list_before.length > list_after.length, "looks like the size of diract list did not decrease"
       end
 
       should "add entries to .diract if new files are created" do
-         skip "test not implemented"
+         list_before = Diract.new(@conf_file.path).list
+
+         add_test_file("brand_new_file")
+
+         list_after = Diract.new(@conf_file.path).list
+
+         assert_not_equal list_after, list_before, "diract did not update .diract"
+         assert list_before.length < list_after.length, "looks like the size of diract list did not increase"
       end
 
       teardown do
