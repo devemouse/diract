@@ -1,0 +1,192 @@
+Thread ID: 6029888
+Total Time: 0.14
+
+  %total   %self     total      self      wait     child            calls   Name
+--------------------------------------------------------------------------------
+ 100.00%   0.00%      0.14      0.00      0.00      0.14                2     Global#[No method]
+                      0.14      0.01      0.00      0.12              1/1     Kernel#load
+--------------------------------------------------------------------------------
+                      0.14      0.01      0.00      0.12              1/1     Global#[No method]
+ 100.00%  10.71%      0.14      0.01      0.00      0.12                1     Kernel#load
+                      0.09      0.02      0.00      0.08             2/11     Kernel#require
+                      0.02      0.00      0.00      0.02              1/1     Kernel#puts
+                      0.01      0.00      0.00      0.01             1/75     Class#new
+                      0.00      0.00      0.00      0.00              4/4     Hash#[]
+                      0.00      0.00      0.00      0.00              1/1     Trollop#options
+                      0.00      0.00      0.00      0.00              1/1     Diract#list
+                      0.00      0.00      0.00      0.00             2/12     IO#set_encoding
+--------------------------------------------------------------------------------
+                      0.00      0.06      0.00      0.00             9/11     Kernel#require
+                      0.09      0.02      0.00      0.08             2/11     Kernel#load
+  67.14%  56.43%      0.09      0.08      0.00      0.08               11     Kernel#require
+                      0.01      0.00      0.00      0.01              1/1     Win32::Registry#open
+                      0.00      0.00      0.00      0.00             1/51     Fixnum#to_s
+                      0.00      0.00      0.00      0.00              1/1     Exception#exception
+                      0.00      0.00      0.00      0.00              1/8     Enumerable#each_with_index
+                      0.00      0.00      0.00      0.00              1/2     Kernel#proc
+                      0.00      0.00      0.00      0.00              1/1     Module#private_class_method
+                      0.00      0.00      0.00      0.00             2/78     Array#each
+                      0.00      0.00      0.00      0.00              1/1     Enumerable#grep
+                      0.00      0.00      0.00      0.00              1/1     Module#constants
+                      0.00      0.00      0.00      0.00             2/75     Class#new
+                      0.00      0.00      0.00      0.00              1/1     <Object::Object>#include
+                      0.00      0.00      0.00      0.00            62/62     <Class::Win32::Console::API>#constant
+                      0.00      0.00      0.00      0.00            70/76     BasicObject#singleton_method_added
+                      0.00      0.00      0.00      0.00            1/113     Module#===
+                      0.00      0.00      0.00      0.00              2/3     <Class::IO>#new
+                      0.00      0.00      0.00      0.00           57/119     Fixnum#|
+                      0.00      0.00      0.00      0.00              1/1     Exception#backtrace
+                      0.00      0.00      0.00      0.00              1/1     <Class::Win32::Console>#OutputCP
+                      0.00      0.00      0.00      0.00              1/1     Exception#set_backtrace
+                      0.00      0.00      0.00      0.00              4/4     Module#include
+                      0.00      0.00      0.00      0.00              1/2     Module#remove_method
+                      0.00      0.00      0.00      0.00              3/4     <Class::Range>#allocate
+                      0.00      0.00      0.00      0.00              2/2     Module#module_function
+                      0.00      0.00      0.00      0.00              2/2     Module#private
+                      0.00      0.00      0.00      0.00              4/4     Module#attr_reader
+                      0.00      0.00      0.00      0.00             1/43     Proc#call
+                      0.00      0.00      0.00      0.00             1/18     <Class::File>#join
+                      0.00      0.00      0.00      0.00              1/1     <Object::Object>#[]
+                      0.00      0.00      0.00      0.00            11/11     Class#inherited
+                      0.00      0.00      0.00      0.00          123/137     Module#method_added
+                      0.00      0.00      0.00      0.00              1/1     String#include?
+                      0.00      0.06      0.00      0.00             9/11     Kernel#require
+                      0.00      0.00      0.00      0.00            10/12     IO#set_encoding
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00             2/75     Kernel#require
+                      0.00      0.00      0.00      0.00            12/75     Win32API#initialize
+                      0.00      0.00      0.00      0.00            20/75     Array#each
+                      0.00      0.00      0.00      0.00             2/75     YAML::Syck::Out#map
+                      0.00      0.00      0.00      0.00             2/75     Win32::Console::ANSI::IO#initialize
+                      0.00      0.00      0.00      0.00             1/75     Trollop#options
+                      0.00      0.00      0.00      0.00             2/75     <Class::YAML::Syck::Emitter>#allocate
+                      0.00      0.00      0.00      0.00             2/75     Diract#initialize
+                      0.00      0.00      0.00      0.00             2/75     <Module::YAML>#parser
+                      0.00      0.00      0.00      0.00             2/75     <Module::YAML>#emitter
+                      0.00      0.00      0.00      0.00            26/75     YAML::Syck::Out#scalar
+                      0.01      0.00      0.00      0.01             1/75     <Class::Win32::Registry>#open
+                      0.01      0.00      0.00      0.01             1/75     Kernel#load
+  21.43%   0.00%      0.03      0.00      0.00      0.03               75     Class#new
+                      0.01      0.01      0.00      0.00              1/1     Win32::Registry#initialize
+                      0.01      0.00      0.00      0.01              1/1     Diract#initialize
+                      0.00      0.00      0.00      0.00              2/2     <Class::Hash>#allocate
+                      0.00      0.00      0.00      0.00              2/2     <Class::YAML::Syck::Map>#allocate
+                      0.00      0.00      0.00      0.00              2/2     YAML::Syck::Out#initialize
+                      0.00      0.00      0.00      0.00              2/2     YAML::Syck::Emitter#initialize
+                      0.00      0.00      0.00      0.00              2/2     <Class::YAML::Syck::Emitter>#allocate
+                      0.00      0.00      0.00      0.00              2/2     YAML::Syck::Parser#initialize
+                      0.00      0.00      0.00      0.00              2/2     <Class::YAML::Syck::Parser>#allocate
+                      0.00      0.00      0.00      0.00              2/2     Hash#initialize
+                      0.00      0.00      0.00      0.00              2/2     YAML::Syck::Map#initialize
+                      0.00      0.00      0.00      0.00            26/26     <Class::YAML::Syck::Scalar>#allocate
+                      0.00      0.00      0.00      0.00              1/1     Trollop::Parser#initialize
+                      0.00      0.00      0.00      0.00              2/2     Win32::Console#initialize
+                      0.00      0.00      0.00      0.00            26/26     YAML::Syck::Scalar#initialize
+                      0.00      0.00      0.00      0.00              9/9     Win32::Registry::PredefinedKey#initialize
+                      0.00      0.00      0.00      0.00            12/12     DL::CFunc#initialize
+                      0.00      0.00      0.00      0.00            12/12     <Class::DL::CFunc>#allocate
+                      0.00      0.00      0.00      0.00            12/12     Win32API#initialize
+                      0.00      0.00      0.00      0.00              1/1     Exception#initialize
+                      0.00      0.00      0.00      0.00            29/29     <Class::BasicObject>#allocate
+--------------------------------------------------------------------------------
+                      0.02      0.00      0.00      0.02              1/1     Kernel#load
+  11.43%   0.00%      0.02      0.00      0.00      0.02                1     Kernel#puts
+                      0.02      0.00      0.00      0.02              1/1     IO#puts
+--------------------------------------------------------------------------------
+                      0.02      0.00      0.00      0.02              1/1     Kernel#puts
+  11.43%   0.00%      0.02      0.00      0.00      0.02                1     IO#puts
+                      0.02      0.00      0.00      0.02              1/1     Win32::Console::ANSI::IO#write
+--------------------------------------------------------------------------------
+                      0.00      0.00      0.00      0.00             1/78     Enumerable#grep
+                      0.00      0.00      0.00      0.00             2/78     Kernel#require
+                      0.00      0.00      0.00      0.00             6/78     Enumerable#each_with_index
+                      0.00      0.00      0.00      0.00             1/78     Trollop::Parser#resolve_default_short_options
+                      0.00      0.00      0.00      0.00            60/78     Win32::Console::ANSI::IO#_PrintString
+                      0.00      0.00      0.00      0.00             2/78     Trollop::Parser#parse
+                      0.00      0.00      0.00      0.00             5/78     Enumerable#find
+                      0.02      0.00      0.00      0.02             1/78     Win32::Console::ANSI::IO#write
+  11.43%   0.00%      0.02      0.00      0.00      0.02               78     Array#each
+                      0.02      0.00      0.00      0.02              1/1     Win32::Console::ANSI::IO#_PrintString
+                      0.00      0.00      0.00      0.00             9/82     String#==
+                      0.00      0.00      0.00      0.00            62/62     String#to_i
+                      0.00      0.00      0.00      0.00            30/30     Range#===
+                      0.00      0.00      0.00      0.00              3/3     Diract#list_dir
+                      0.00      0.00      0.00      0.00             6/13     Hash#member?
+                      0.00      0.00      0.00      0.00              6/6     Kernel#!~
+                      0.00      0.00      0.00      0.00              5/5     Enumerable#find
+                      0.00      0.00      0.00      0.00             5/69     String#split
+                      0.00      0.00      0.00      0.00             8/16     Symbol#==
+                      0.00      0.00      0.00      0.00          304/306     Fixnum#===
+                      0.00      0.00      0.00      0.00            18/19     Array#[]=
+                      0.00      0.00      0.00      0.00            18/22     String#unpack
+                      0.00      0.00      0.00      0.00            18/25     Array#pack
+                      0.00      0.00      0.00      0.00              7/7     Kernel#eval
+                      0.00      0.00      0.00      0.00             7/51     Fixnum#to_s
+                      0.00      0.00      0.00      0.00           22/116     Hash#[]=
+                      0.00      0.00      0.00      0.00            11/11     String#intern
+                      0.00      0.00      0.00      0.00            20/20     Module#const_set
+                      0.00      0.00      0.00      0.00            20/75     Class#new
+                      0.00      0.00      0.00      0.00            21/21     Module#const_get
+                      0.00      0.00      0.00      0.00            50/71     Regexp#===
+--------------------------------------------------------------------------------
+                      0.02      0.00      0.00      0.02              1/1     IO#puts
+  11.43%   0.00%      0.02      0.00      0.00      0.02                1     Win32::Console::ANSI::IO#write
+                      0.02      0.00      0.00      0.02             1/78     Array#each
+                      0.00      0.00      0.00      0.00              1/1     Win32::Console::ANSI::IO#redirected?
+--------------------------------------------------------------------------------
+                      0.02      0.00      0.00      0.02              1/1     Array#each
+  11.43%   0.00%      0.02      0.00      0.00      0.02                1     Win32::Console::ANSI::IO#_PrintString
+                      0.02      0.00      0.00      0.02            60/60     Win32::Console#Attr
+                      0.00      0.00      0.00      0.00            61/61     Win32::Console#Write
+                      0.00      0.00      0.00      0.00            60/78     Array#each
+                      0.00      0.00      0.00      0.00            60/69     String#split
+                      0.00      0.00      0.00      0.00           62/119     Fixnum#|
+                      0.00      0.00      0.00      0.00            61/61     Win32::Console::ANSI::IO#_conv
+                      0.00      0.00      0.00      0.00            61/61     String#sub!
+                      0.00      0.00      0.00      0.00              1/3     String#to_s
+                      0.00      0.00      0.00      0.00              1/1     Kernel#dup
+--------------------------------------------------------------------------------
+                      0.02      0.00      0.00      0.02            60/60     Win32::Console::ANSI::IO#_PrintString
+  11.43%   0.00%      0.02      0.00      0.00      0.02               60     Win32::Console#Attr
+                      0.02      0.02      0.00      0.00            60/60     <Class::Win32::Console::API>#SetConsoleTextAttribute
+                      0.00      0.00      0.00      0.00            60/60     Array#size
+--------------------------------------------------------------------------------
+                      0.02      0.02      0.00      0.00            60/60     Win32::Console#Attr
+  11.43%  11.43%      0.02      0.02      0.00      0.00               60     <Class::Win32::Console::API>#SetConsoleTextAttribute
+--------------------------------------------------------------------------------
+                      0.01      0.00      0.00      0.01              1/1     Class#new
+  10.71%   0.00%      0.01      0.00      0.00      0.01                1     Diract#initialize
+                      0.01      0.00      0.00      0.01              1/1     Enumerable#map
+                      0.00      0.00      0.00      0.00             2/75     Class#new
+                      0.00      0.00      0.00      0.00              1/5     IO#close
+                      0.00      0.00      0.00      0.00              1/3     <Class::IO>#new
+                      0.00      0.00      0.00      0.00              1/3     <Class::File>#exists?
+--------------------------------------------------------------------------------
+                      0.01      0.00      0.00      0.01              1/1     Diract#initialize
+  10.71%   0.00%      0.01      0.00      0.00      0.01                1     Enumerable#map
+                      0.01      0.01      0.00      0.00              1/1     IO#each
+--------------------------------------------------------------------------------
+                      0.01      0.00      0.00      0.01              1/1     Kernel#require
+  10.71%   0.00%      0.01      0.00      0.00      0.01                1     Win32::Registry#open
+                      0.01      0.00      0.00      0.01              1/1     <Class::Win32::Registry>#open
+                      0.00      0.00      0.00      0.00              1/1     Win32::Registry::PredefinedKey#class
+--------------------------------------------------------------------------------
+                      0.01      0.00      0.00      0.01              1/1     Win32::Registry#open
+  10.71%   0.00%      0.01      0.00      0.00      0.01                1     <Class::Win32::Registry>#open
+                      0.01      0.00      0.00      0.01             1/75     Class#new
+                      0.00      0.00      0.00      0.00              1/1     Kernel#block_given?
+                      0.00      0.00      0.00      0.00              1/1     Win32::Registry#[]
+                      0.00      0.00      0.00      0.00              1/1     Win32::Registry#close
+                      0.00      0.00      0.00      0.00              1/1     Win32::Registry::API#OpenKey
+                      0.00      0.00      0.00      0.00              1/4     String#chomp
+--------------------------------------------------------------------------------
+                      0.01      0.01      0.00      0.00              1/1     Enumerable#map
+  10.71%  10.71%      0.01      0.01      0.00      0.00                1     IO#each
+                      0.00      0.00      0.00      0.00              3/4     String#chomp
+--------------------------------------------------------------------------------
+                      0.01      0.01      0.00      0.00              1/1     Class#new
+  10.71%  10.71%      0.01      0.01      0.00      0.00                1     Win32::Registry#initialize
+                      0.00      0.00      0.00      0.00              1/1     <Module::ObjectSpace>#define_finalizer
+                      0.00      0.00      0.00      0.00             1/43     Proc#call
+
+

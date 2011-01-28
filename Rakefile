@@ -40,6 +40,16 @@ Reek::Rake::Task.new do |t|
   t.fail_on_error = false
 end
 
+require 'ruby-prof/task'
+RubyProf::ProfileTask.new do |t|
+   t.libs << 'lib' << 'test'
+   t.test_files = FileList['bin/*', 'test/test*.rb']
+   t.output_dir = "prof/"
+   t.printer = :graph
+   t.min_percent = 10
+end
+
+
 require 'rcov/rcovtask'
 Rcov::RcovTask.new do |test|
   test.libs << 'test'

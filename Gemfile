@@ -13,4 +13,5 @@ group :development do
   gem "trollop", "~> 1.16.2"
   gem "win32console", "~> 1.3.0"
   gem "metric_fu", "~> 2.0.1"
+  gem "ruby-prof", "~> 0.9.2"
 end

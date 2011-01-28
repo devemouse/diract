@@ -1,0 +1,76 @@
+Thread ID: 6029888
+Total Time: 0.296
+
+  %total   %self     total      self      wait     child            calls   Name
+--------------------------------------------------------------------------------
+ 100.00%   0.00%      0.30      0.00      0.00      0.30                1     Global#[No method]
+                      0.30      0.00      0.00      0.30              1/1     Kernel#load
+--------------------------------------------------------------------------------
+                      0.30      0.00      0.00      0.30              1/1     Global#[No method]
+ 100.00%   0.00%      0.30      0.00      0.00      0.30                1     Kernel#load
+                      0.30      0.02      0.00      0.28             2/40     Kernel#require
+                      0.00      0.00      0.00      0.00              1/2     <Class::MiniTest::Unit::TestCase>#inherited
+                      0.00      0.00      0.00      0.00              1/1     Shoulda::ClassMethods#context
+                      0.00      0.00      0.00      0.00             2/50     IO#set_encoding
+--------------------------------------------------------------------------------
+                      0.00      0.28      0.00      0.00            38/40     Kernel#require
+                      0.30      0.02      0.00      0.28             2/40     Kernel#load
+ 100.00% 100.00%      0.30      0.30      0.00      0.28               40     Kernel#require
+                      0.00      0.00      0.00      0.00              1/6     Exception#set_backtrace
+                      0.00      0.00      0.00      0.00              1/6     Exception#backtrace
+                      0.00      0.00      0.00      0.00              1/6     Exception#exception
+                      0.00      0.00      0.00      0.00             1/11     Enumerable#each_with_index
+                      0.00      0.00      0.00      0.00              1/4     Kernel#proc
+                      0.00      0.00      0.00      0.00              1/1     Module#private_class_method
+                      0.00      0.00      0.00      0.00              1/5     Enumerable#grep
+                      0.00      0.00      0.00      0.00              1/1     Module#constants
+                      0.00      0.00      0.00      0.00              1/1     <Object::Object>#include
+                      0.00      0.00      0.00      0.00            62/62     <Class::Win32::Console::API>#constant
+                      0.00      0.00      0.00      0.00             1/80     Module#===
+                      0.00      0.00      0.00      0.00            1/311     Regexp#===
+                      0.00      0.00      0.00      0.00              1/1     Kernel#inspect
+                      0.00      0.00      0.00      0.00             1/83     Kernel#class
+                      0.00      0.00      0.00      0.00              2/2     Module#module_function
+                      0.00      0.00      0.00      0.00              1/4     Module#public_instance_methods
+                      0.00      0.00      0.00      0.00             5/41     Array#each
+                      0.00      0.00      0.00      0.00             2/14     <Class::IO>#new
+                      0.00      0.00      0.00      0.00            57/61     Fixnum#|
+                      0.00      0.00      0.00      0.00             2/55     Fixnum#to_s
+                      0.00      0.00      0.00      0.00              1/1     <Class::Win32::Console>#OutputCP
+                      0.00      0.00      0.00      0.00              1/1     Win32::Registry#open
+                      0.00      0.00      0.00      0.00              1/8     Module#remove_method
+                      0.00      0.00      0.00      0.00              3/5     <Class::Range>#allocate
+                      0.00      0.00      0.00      0.00              2/2     Kernel#extend
+                      0.00      0.00      0.00      0.00              1/2     <Class::MiniTest::Unit::TestCase>#inherited
+                      0.00      0.00      0.00      0.00            14/14     Module#include
+                      0.00      0.00      0.00      0.00              1/1     <Class::MiniTest::Unit::TestCase>#reset
+                      0.00      0.00      0.00      0.00              8/8     Module#attr_reader
+                      0.00      0.00      0.00      0.00            12/12     Module#attr_accessor
+                      0.00      0.00      0.00      0.00              1/1     Module#protected
+                      0.00      0.00      0.00      0.00              5/5     Module#private
+                      0.00      0.00      0.00      0.00              1/1     Object#DelegateClass
+                      0.00      0.00      0.00      0.00              1/5     <Class::File>#writable?
+                      0.00      0.00      0.00      0.00              1/7     <Class::File>#directory?
+                      0.00      0.00      0.00      0.00              1/8     Kernel#untaint
+                      0.00      0.00      0.00      0.00              1/1     String#force_encoding
+                      0.00      0.00      0.00      0.00              1/1     String#encoding
+                      0.00      0.00      0.00      0.00              1/1     <Class::Dir>#pwd
+                      0.00      0.00      0.00      0.00              2/6     <Class::File>#expand_path
+                      0.00      0.00      0.00      0.00              1/1     String#rstrip
+                      0.00      0.00      0.00      0.00              1/5     Win32API#call
+                      0.00      0.00      0.00      0.00            5/119     Class#new
+                      0.00      0.00      0.00      0.00              1/2     String#*
+                      0.00      0.00      0.00      0.00             1/17     <Object::Object>#[]
+                      0.00      0.00      0.00      0.00            23/24     Class#inherited
+                      0.00      0.00      0.00      0.00              1/1     String#include?
+                      0.00      0.00      0.00      0.00              1/2     <Class::MiniTest::Unit>#autorun
+                      0.00      0.00      0.00      0.00           97/110     BasicObject#singleton_method_added
+                      0.00      0.00      0.00      0.00          288/470     Module#method_added
+                      0.00      0.00      0.00      0.00              2/2     Array#unshift
+                      0.00      0.00      0.00      0.00             3/47     <Class::File>#join
+                      0.00      0.00      0.00      0.00              4/4     <Class::File>#dirname
+                      0.00      0.00      0.00      0.00              1/1     <Module::Bundler>#setup
+                      0.00      0.28      0.00      0.00            38/40     Kernel#require
+                      0.00      0.00      0.00      0.00            48/50     IO#set_encoding
+
+
