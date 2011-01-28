@@ -21,8 +21,9 @@ class Test::Unit::TestCase
    def prepare_conf(num_of_dirs = 1)
       @conf_file = Tempfile.new('foo')
       @testfiles = [ {:name => "file1", :desc => "f1 description1"},
-                     {:name => "file2", :desc => nil},
-                     {:name => "file3", :desc => "f3 description3"} ]
+                     {:name => "file2", :desc => "f2 description"},
+                     {:name => "file3", :desc => nil},
+                     {:name => "file4", :desc => "f4 description3"} ]
 
       if num_of_dirs > 1
          @tmpdir = Array.new(num_of_dirs)

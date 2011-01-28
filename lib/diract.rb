@@ -68,14 +68,9 @@ class Diract
       @entries = Hash.new
    end
 
-   def delete(entries)
+   def delete(*entries)
       list if @entries.empty?
-
-      if entries.is_a?(Enumerable)
-         entries.each {|entry| @entries.remove(entry)}
-      else
-         @entries.remove( entries )
-      end
+      entries.map {|entry| @entries.remove(entry)}
    end
 
    def list
