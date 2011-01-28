@@ -41,7 +41,7 @@ end
 #Hash is expanded by methods needed to operate on entries in .diract files
 class Hash
    def remove(item)
-      item_to_remove = self[item]
+      item_to_remove = self.delete(item)
       full_path = item_to_remove[:file]
 
       begin
