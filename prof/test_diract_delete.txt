@@ -1,21 +1,21 @@
 Thread ID: 6029888
-Total Time: 0.296
+Total Time: 0.312
 
   %total   %self     total      self      wait     child            calls   Name
 --------------------------------------------------------------------------------
- 100.00%   0.00%      0.30      0.00      0.00      0.30                1     Global#[No method]
-                      0.30      0.00      0.00      0.30              1/1     Kernel#load
+ 100.00%   0.00%      0.31      0.00      0.00      0.31                1     Global#[No method]
+                      0.31      0.00      0.00      0.31              1/1     Kernel#load
 --------------------------------------------------------------------------------
-                      0.30      0.00      0.00      0.30              1/1     Global#[No method]
- 100.00%   0.00%      0.30      0.00      0.00      0.30                1     Kernel#load
-                      0.30      0.02      0.00      0.28             2/40     Kernel#require
+                      0.31      0.00      0.00      0.31              1/1     Global#[No method]
+ 100.00%   0.00%      0.31      0.00      0.00      0.31                1     Kernel#load
+                      0.31      0.03      0.00      0.28             2/40     Kernel#require
                       0.00      0.00      0.00      0.00              1/2     <Class::MiniTest::Unit::TestCase>#inherited
                       0.00      0.00      0.00      0.00              1/1     Shoulda::ClassMethods#context
                       0.00      0.00      0.00      0.00             2/50     IO#set_encoding
 --------------------------------------------------------------------------------
                       0.00      0.28      0.00      0.00            38/40     Kernel#require
-                      0.30      0.02      0.00      0.28             2/40     Kernel#load
- 100.00% 100.00%      0.30      0.30      0.00      0.28               40     Kernel#require
+                      0.31      0.03      0.00      0.28             2/40     Kernel#load
+ 100.00% 100.00%      0.31      0.31      0.00      0.28               40     Kernel#require
                       0.00      0.00      0.00      0.00              1/6     Exception#set_backtrace
                       0.00      0.00      0.00      0.00              1/6     Exception#backtrace
                       0.00      0.00      0.00      0.00              1/6     Exception#exception
