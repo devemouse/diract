@@ -73,10 +73,7 @@ class Diract
 
       if entries.is_a?(Enumerable)
       else
-         pp @entries
-         ret = @entries.remove( entries )
-         pp @entries
-         ret
+         @entries.remove( entries )
       end
    end
 
