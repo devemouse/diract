@@ -11,20 +11,27 @@ global_opts = Trollop::options do
    Action directories lister
 
    Usage:
-   diract [options] sub_command
+   diract [option]
 
-   available sub_commands:
+   Example: 
 
-#{SUB_COMMANDS.to_s}
+   Listing entries: diract
 
-   where [options] are:
+   a0 - first file in first directory
 
+     deleting files: diract -d a0
+   commenting files: diract -c a0 your comment
+
+   IMPORTANT NOTE:
+   -d and -c options _must_ be the last ones specified
+
+   Available [options]:
 EOS
    opt :dry_run, "Don't actually do anything", :short => "-n"
    opt :verbose, "display debug information", :default => false
    opt :config, "configuration file", :type => String, :default => "diract.conf", :short => "-f"
    opt :delete, "delete file", :type => String
-   opt :conmment, "add a comment to a file", :type => String
+   opt :comment, "add a comment to a file", :type => String
    stop_on SUB_COMMANDS
 end
 
@@ -36,14 +43,16 @@ else
 end
 
 if global_opts[:delete_given]
-   unless diract.delete(global_opts[:delete]).nil?
-      puts "file deleted"
-      puts diract.list
+   deleted_files = diract.delete(global_opts[:delete])
+   unless deleted_files.nil?
+      puts "files deleted:"
+      deleted_files.each {|el| puts el}
    else
       puts "error deleting file"
    end
 elsif global_opts[:comment_given]
-   puts "you want to comment " + global_opts[:delete]
+   puts "added comment:"
+   puts diract.describe( global_opts[:comment], ARGV.join(" ") )
 else
    puts diract.list
 end
