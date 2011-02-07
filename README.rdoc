@@ -1,6 +1,8 @@
-== Introduction
+= Diract
 
 Diract (DIRectory ACTions) is a command line utility for managing "@action" folders.
+
+== Introduction
 
 There are plenty todo-list aplications that sotore todo's in text, xml, other files or databases.
 Many of them allow you to link something (a file, url etc..) to your task item.
