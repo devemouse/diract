@@ -1,6 +1,44 @@
-= diract
+== Introduction
 
-Description goes here.
+Diract (DIRectory ACTions) is a command line utility for managing "@action" folders.
+
+There are plenty todo-list aplications that sotore todo's in text, xml, other files or databases.
+Many of them allow you to link something (a file, url etc..) to your task item.
+But what if it's too much effort? Why not other way around?
+
+Use case:
+You browse internet, find some cool aplication, pdf for later reading, image you want to proces.
+You download the file and decide you will go back to it later. You finish browsing downloading some more files in meantime, look at those files and still remember what to do with them.
+You drop the files into @action folder so you remember to go back to it later.
+A week later you come back to your @action and you find diyp3h_harmony_aio_1.pdf in you folder. You have action item that sais "review those new templates for weekly shedule". But you didn't link this item to specific files so you neither know what to do with the file or how to complete you action.  The goal of having todo list (or to-be-done list) is not having to rethink everything later. 
+
+Diract offers aided way for such use case. It assigns description to a file.
+Using diract's commands you can easily list, comment, delete files from predefined folders.
+In previous example you instead of creating todo item you would add description to file directly. You can later easily import those descriptions to your favorite todo app.
+== Instalation
+
+Diract requires ruby v1.9.1 or greater.
+
+Target is to put this app to gems repository, for now (untill first version is released) use:
+   rake install
+
+== Configuration
+
+After first call diract creates (if not already exists) .diractrc in HOME folder.
+It is simple list with folder paths.
+Edit the file and place location(s) of your action folder(s).
+
+== Usage
+
+To list action items 
+   diract [list]
+
+To comment item:
+   diract <id> -c comment
+where <id> is completed with folder letter and item number (list items to see how diract assigns them)
+
+To delete item:
+   diract <id> -d
 
 == Contributing to diract
  
